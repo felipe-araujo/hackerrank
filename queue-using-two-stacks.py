@@ -5,14 +5,25 @@ l0 = []
 l1 = []
 for _ in range(n):
     args = input().split()
-    if args[0] == '1':
+    if args[0] == '1':        
         v = int(args[1])
-        for t in range(len(l0)):
-            l1.append(l0.pop())
-        l0.append(v)
-        for t in range(len(l1)):
-            l0.append(l1.pop())        
+        if l0:            
+            for t in range(len(l0)):
+                l1.append(l0.pop())
+            l1.append(v)
+        elif not l0:            
+            l1.append(v)        
     elif args[0] == '2':
-        l0.pop()
+        if l0:
+            l0.pop()
+        elif l1:
+            for t in range(len(l1)-1):
+                l0.append(l1.pop())
+            l1.pop()
     else:
-        print(l0[-1])
+        if not l0 and l1:
+            for t in range(len(l1)):
+                l0.append(l1.pop())
+        if l0:
+            print(l0[-1])
+        
