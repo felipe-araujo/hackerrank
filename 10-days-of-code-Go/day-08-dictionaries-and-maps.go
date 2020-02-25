@@ -1,8 +1,9 @@
 package main
 
-import (
+import (	
 	"bufio"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 
@@ -11,36 +12,36 @@ import (
 func main() {
 	//Enter your code here. Read input from STDIN. Print output to STDOUT
 	var n string
-	fmt.Scanln(&n)
 	scanner := bufio.NewScanner(os.Stdin)
-	n := scanner.Text()
-	times, _ := strconv.Atoi(n)
+	scanner.Scan()
+	n = scanner.Text()
+	times, err := strconv.Atoi(n)
+	if err != nil{
+		panic(err)
+	}
+	//fmt.Printf("times= %d\n", times)
 
 	var book = make(map[string]string)
 	var name string
 	var tel string
 	var line string
 	for t := 0; t < times; t++ {
+		scanner.Scan()
 		line = scanner.Text()
-		words := strings.Fields(someString)
-		//fmt.Scanln(&tel)
+		words := strings.Fields(line)
+		//fmt.Print(words)
 		name = words[0]
 		tel = words[1]
 		book[name] = tel
 	}
-	//fmt.Println(book)
-
-	var query string
-	for {
-		_, err := fmt.Scanln(&query)
-		if err != nil {
-			break
-		}
-
-		if val, ok := book[query]; ok {
-			fmt.Println(query + "=" + val)
-		} else {
+	
+	for scanner.Scan(){
+		line = scanner.Text()
+		if val, ok := book[line]; ok {
+			fmt.Println(line + "=" + val)
+		}else{
 			fmt.Println("Not found")
 		}
 	}
+
 }
