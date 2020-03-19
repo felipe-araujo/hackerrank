@@ -19,7 +19,7 @@ defmodule Solution do
   end
 
   def step({sorted, [h | []], counter}) do
-    {sorted ++ [h], [],counter}
+    {sorted ++ [h], [], counter}
   end
 
   def step({sorted, [h | t], counter}) do
