@@ -13,7 +13,7 @@ end
 
 def is_palindrome?(n)
     s = n.to_s()    
-    s == s.reverse     
+    s == s.reverse
 end
 
 n = gets().to_i()
