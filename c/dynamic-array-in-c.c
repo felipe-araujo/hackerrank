@@ -23,7 +23,7 @@ int main()
     int** total_number_of_pages;
     int* total_number_of_books;
 
-    total_number_of_pages = (int**) calloc(total_number_of_shelves, sizeof(int));
+    total_number_of_pages = (int**) calloc(total_number_of_shelves, sizeof(int*));
     total_number_of_books = (int*) calloc(total_number_of_shelves, sizeof(int));
 
     for(int i=0; i<total_number_of_shelves; i++){
@@ -43,16 +43,15 @@ int main()
             int number_of_books = *(total_number_of_books+x) + 1;
             *(total_number_of_books+x) = number_of_books;
             if(!(*(total_number_of_pages+x))){
-                printf("\n[calloc]\n");
+                //printf("\n[calloc]\n");
                 *(total_number_of_pages+x) = (int*) calloc(1, sizeof(int));
             }else {
-                printf("\n[realloc] number_of_books=%d\n", number_of_books);
-                int new_size = number_of_books * sizeof(int);
-                printf("\n[realloc] memory to be allocated=%d\n", number_of_books);
+                //printf("\n[realloc] number_of_books=%d\n", number_of_books);
+                int new_size = number_of_books * sizeof(int);                
                 int* ptr = (int*) realloc(*(total_number_of_pages+x), new_size);
                 *(total_number_of_pages+x) = ptr;
             }
-            *(*(total_number_of_pages+x) + number_of_books) = y;
+            *(*(total_number_of_pages+x) + number_of_books-1) = y;
 
 
 
@@ -67,24 +66,18 @@ int main()
         }
     }
 
-    if (total_number_of_books) {
-        printf("\nfree total_number_of_books... \n");
-        free(total_number_of_books);
-        printf("\nfree total_number_of_books... done. \n");
+    if (total_number_of_books) {        
+        free(total_number_of_books);        
     }
     
     for (int i = 0; i < total_number_of_shelves; i++) {
-        if (*(total_number_of_pages + i)) {
-            printf("\nfree total_number_of_pages+i... \n");
+        if (*(total_number_of_pages + i)) {            
             free(*(total_number_of_pages + i));
-            printf("\nfree total_number_of_pages+i... done.\n");
         }
     }
     
-    if (total_number_of_pages) {
-        printf("\nfree total_number_of_pages... \n");
-        free(total_number_of_pages);
-        printf("\nfree total_number_of_pages... done.\n");
+    if (total_number_of_pages) {        
+        free(total_number_of_pages);        
     }
     
     return 0;
