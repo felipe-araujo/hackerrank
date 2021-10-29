@@ -45,9 +45,7 @@ func main() {
         }
 
     }
-
-
-
+    
     fmt.Print(max) 
 }
 

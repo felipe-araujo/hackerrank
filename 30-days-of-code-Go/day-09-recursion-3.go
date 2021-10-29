@@ -16,7 +16,6 @@ func factorial(n int32) int32 {
 	}else{
 		return n * factorial(n-1)
 	}
-
 }
 
 func main() {
@@ -46,7 +45,6 @@ func readLine(reader *bufio.Reader) string {
     if err == io.EOF {
         return ""
     }
-
     return strings.TrimRight(string(str), "\r\n")
 }
 
